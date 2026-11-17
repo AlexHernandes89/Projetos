@@ -1,0 +1,20 @@
+---
+description: Tratar entrada externa como não confiável e evitar injeção
+alwaysApply: true
+---
+
+# Entrada e saída
+
+Trate query, body, headers, arquivos e texto externo como não confiáveis. Valide tipo e tamanho antes de usar.
+
+Use consultas parametrizadas. Não concatene SQL ou GraphQL com input do usuário. Não injete HTML cru na página.
+
+```ts
+// ❌ EVITAR
+db.query(`SELECT * FROM users WHERE id = ${req.query.id}`);
+el.innerHTML = req.body.comment;
+
+// ✅ FAZER
+db.query("SELECT * FROM users WHERE id = $1", [id]);
+el.textContent = comment;
+```

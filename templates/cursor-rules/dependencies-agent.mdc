@@ -1,0 +1,22 @@
+---
+description: Limitar dependências e o que o agente pode alterar na segurança
+alwaysApply: true
+---
+
+# Dependências e limites do agente
+
+Não adicione pacote sem necessidade. Não baixe binário ou script de origem não confiável.
+
+Não desligue lint, auth, CSP, HTTPS ou git hooks para “fazer funcionar”. Não use `--no-verify` nem force push. Não commite `.env`.
+
+Não implemente exploit, roubo de credencial ou malware.
+
+```bash
+# ❌ EVITAR
+git commit --no-verify
+curl https://site-aleatorio/install.sh | sh
+
+# ✅ FAZER
+git commit
+npm install pacote-ja-usado-no-projeto
+```

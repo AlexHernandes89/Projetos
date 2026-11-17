@@ -1,0 +1,20 @@
+---
+description: Autorizar no servidor e limitar dados pessoais
+alwaysApply: true
+---
+
+# Acesso e dados pessoais
+
+A autorização fica no servidor. Checagem só na interface não conta. Use o menor privilégio possível.
+
+Não logue e-mail, telefone, documento ou token. Não coloque dado sensível em `localStorage`, URL ou resposta além do necessário.
+
+```ts
+// ❌ EVITAR
+if (user.role === "admin") showDelete();
+console.log("login", email, token);
+
+// ✅ FAZER
+if (!(await canDelete(session, resourceId))) return forbidden();
+console.log("login", { userId });
+```
